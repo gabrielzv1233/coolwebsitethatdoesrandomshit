@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seman.Stream</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+        .container {
+            text-align: center;
+            display: none;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 10;
+        }
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <h1>Click or tap anywhere to start</h1>
+    </div>
+
+    <div class="container">
+        <h1 id="countdown">Click the button in 3 seconds or get Rick Rolled!</h1>
+        <button id="redirectButton">Click me!</button>
+    </div>
+
+    <script>
+        const overlay = document.querySelector('.overlay');
+        const container = document.querySelector('.container');
+        const countdownElement = document.getElementById('countdown');
+        const button = document.getElementById('redirectButton');
+
+        const timeoutWebsites = [
+            "https://www.youtube.com/watch?v=xvFZjo5PgG0" // told ya
+        ];
+
+        const buttonWebsites = [
+            "https://www.youtube.com/watch?v=6dMjCa0nqK0", // skib
+            "https://www.youtube.com/watch?v=PXqcHi2fkXI", // trolled
+            "https://www.youtube.com/watch?v=pxw-5qfJ1dk", // shrek
+            "https://www.cheese.com/", // what do you think?
+            "https://www.youtube.com/watch?v=C43p8h99Cs0", // oo ee a e a
+            "https://www.youtube.com/watch?v=YRvOePz2OqQ", // spinning cat.mp4
+            "https://www.youtube.com/watch?v=V6HmBbp-OY4", // itialian
+            "https://www.youtube.com/watch?v=7Xplhr7-TJs", // distraction
+            "https://www.youtube.com/watch?v=NRZIGj3xHkI", // howdy
+            "https://www.youtube.com/watch?v=iH4fHAwE7yc", // howdy pt2
+            "https://gabrielzv1233.net", // shameless
+            "https://cat-bounce.com/" // boing
+
+        ];
+
+        const mouseSpecificWebsites = [
+            "https://pointerpointer.com", // 🫵
+            "http://www.staggeringbeauty.com/", // MY EARS
+            ];
+
+            const hasMouse = window.matchMedia('(pointer: fine)').matches;
+    
+            if (hasMouse) {
+                buttonWebsites.push(...mouseSpecificWebsites);
+                console.log("Mouse detected: Mouse-specific websites added.");
+            } else {
+                console.log("No mouse detected: Mouse-specific websites not added.");
+            }
+    
+            let countdown = 3;
+    
+            const startCountdown = () => {
+                overlay.style.display = 'none';
+                container.style.display = 'block';
+    
+                const interval = setInterval(() => {
+                    countdownElement.textContent = `Click the button in ${countdown} seconds or get Rick Rolled!`;
+                    countdown--;
+    
+                    if (countdown < 0) {
+                        clearInterval(interval);
+                        const randomIndex = Math.floor(Math.random() * timeoutWebsites.length);
+                        window.location.assign(timeoutWebsites[randomIndex]);
+                    }
+                }, 1000);
+    
+                button.addEventListener('click', () => {
+                    clearInterval(interval);
+                    const randomIndex = Math.floor(Math.random() * buttonWebsites.length);
+                    window.location.assign(buttonWebsites[randomIndex]);
+                });
+            };
+    
+            overlay.addEventListener('click', startCountdown);
+            overlay.addEventListener('touchstart', startCountdown, { once: true });
+        </script>
+    </body>
+    </html>
