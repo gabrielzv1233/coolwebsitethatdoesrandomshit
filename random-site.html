@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoolWebsiteThatDoesRandomShit</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+        .container {
+            text-align: center;
+            display: none;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 10;
+        }
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <h1>Click or tap anywhere to start</h1>
+    </div>
+
+    <div class="container">
+        <h1 id="countdown">Click the button in 3 seconds or get Rick Rolled!</h1>
+        <button id="redirectButton">Click me!</button>
+    </div>
+
+    <script>
+        const overlay = document.querySelector('.overlay');
+        const container = document.querySelector('.container');
+        const countdownElement = document.getElementById('countdown');
+        const button = document.getElementById('redirectButton');
+    
+        const timeoutWebsites = [
+            "https://www.youtube.com/watch?v=xvFZjo5PgG0?t=0" // told ya
+        ];
+    
+        const buttonWebsites = [
+            "https://youtu.be/6dMjCa0nqK0?t=0&utm_source=seman.stream", // skib
+            "https://youtu.be/PXqcHi2fkXI?t=0&utm_source=seman.stream", // trolled
+            "https://youtu.be/pxw-5qfJ1dk?t=0&utm_source=seman.stream", // shrek
+            "https://youtu.be/C43p8h99Cs0?t=0&utm_source=seman.stream", // oo ee a e a
+            "https://youtu.be/YRvOePz2OqQ?t=0&utm_source=seman.stream", // spinning cat.mp4
+            "https://youtu.be/V6HmBbp-OY4?t=0&utm_source=seman.stream", // itialian
+            "https://youtu.be/7Xplhr7-TJs?t=0&utm_source=seman.stream", // distraction
+            "https://youtu.be/NRZIGj3xHkI?t=0&utm_source=seman.stream", // howdy
+            "https://youtu.be/iH4fHAwE7yc?t=0&utm_source=seman.stream", // howdy pt2
+            "https://youtu.be/_WZCvQ5J3pk?t=34&utm_source=seman.stream", // skyrim
+            "https://youtu.be/eUBtsPEWgaY?t=9&utm_source=seman.stream", // ear r*pe
+            "https://youtu.be/FtE6SV_1wu4?t=0&utm_source=seman.stream", // vibin
+            "https://youtu.be/aWoR-9K8ENY?t=0&utm_source=seman.stream", // carl
+            // alot of these were taken from theuselessweb
+            "https://www.cheese.com/", // what do you think?
+            "https://gabrielzv1233.net", // shameless
+            "https://cat-bounce.com/", // boing
+            "https://cornhub.website/", // they changed the URL
+            "https://papertoilet.com/", // tp
+            "https://heeeeeeeey.com/", // hooooooooo
+            "http://www.everydayim.com/", // hustlin
+            "https://corndog.io/", // dawg
+            "https://iamawesome.com/", // are you
+            "http://www.ismycomputeron.com/", // yes
+            "https://crouton.net/", // mmm tasty
+            "https://corgiorgy.com/", // can i pet dat dawg
+            "https://wutdafuk.com/", // :O
+            "https://potatoortomato.com/", // you can't get this wrong
+            "https://existentialcrisis.com/", // nuh uh
+            "http://onemillionlols.com/", // lol
+            "http://www.patience-is-a-virtue.org/", // how long have i been here?
+            "http://chihuahuaspin.com/", // i got bord after 3 :/
+            "https://elonjump.com/", // elon
+            "https://notdayoftheweek.com/", // correct
+            "https://www.bouncingdvdlogo.com/", // patiance
+            "https://isitchristmas.com/" // i'd like to know
+        ];
+    
+        const mouseSpecificWebsites = [
+            "https://pointerpointer.com", // 🫵
+            "http://www.staggeringbeauty.com/", // MY EARS
+            "https://cursoreffects.com/", // wow
+            "https://chrismckenzie.com/", // =D
+            "https://eelslap.com/", // WACK!
+            "http://yeahlemons.com/" // LEMONS!!!
+        ];
+    
+        const hasMouse = window.matchMedia('(pointer: fine)').matches;
+    
+        if (hasMouse) {
+            buttonWebsites.push(...mouseSpecificWebsites);
+            console.log("Mouse detected: Mouse-specific websites added.");
+        } else {
+            console.log("No mouse detected: Mouse-specific websites not added.");
+        }
+    
+        let countdown = 3;
+        let interval;
+    
+        const startCountdown = () => {
+            overlay.style.display = 'none';
+            container.style.display = 'block';
+        
+            countdownElement.textContent = `Click the button in ${countdown} seconds or get Rick Rolled!`;
+        
+            interval = setInterval(() => {
+                countdown--;
+                if (countdown === 0) {
+                    countdownElement.textContent = `Click the button in 0 seconds or get Rick Rolled!`;
+                    clearInterval(interval);
+                    const randomIndex = Math.floor(Math.random() * timeoutWebsites.length);
+                    location.replace(timeoutWebsites[randomIndex]);
+                } else {
+                    countdownElement.textContent = `Click the button in ${countdown} seconds or get Rick Rolled!`;
+                }
+            }, 1000);
+        };
+        
+    
+        const resetTimer = () => {
+            clearInterval(interval);
+            countdown = 3;
+            countdownElement.textContent = `Click the button in ${countdown} seconds or get Rick Rolled!`;
+            startCountdown();
+        };
+    
+        overlay.addEventListener('click', startCountdown);
+        overlay.addEventListener('touchstart', startCountdown, { once: true });
+    
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('timerState', countdown);
+        });
+    
+        window.addEventListener('load', () => {
+            const savedCountdown = sessionStorage.getItem('timerState');
+            if (savedCountdown) {
+                countdown = parseInt(savedCountdown, 10);
+                resetTimer();
+            }
+        });
+    </script>
+    </body>
+    </html>

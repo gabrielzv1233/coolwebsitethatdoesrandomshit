@@ -1,177 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoolWebsiteThatDoesRandomShit</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-        }
-        .container {
-            text-align: center;
-            display: none;
-        }
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            z-index: 10;
-        }
-        h1 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>swaws.dev</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Source Code Pro', monospace;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 0;
+      margin-bottom: 0px;
+      margin-top: 10px;
+    }
+
+    .center-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: calc(100vh - 50px);
+      width: 100%;
+      padding: 0px;
+      overflow: hidden;
+    }
+
+    #container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0px;
+      height: 100%;
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+    }
+
+    button {
+      display: block;
+      flex-shrink: 0;
+      width: 325px;
+      height: 90%;
+      margin: 0 5px;
+      border: 2px solid lightgray;
+      border-radius: 10px;
+      outline: 2px solid white;
+      background-color: white;
+      color: darkgray;
+      font-size: 125%;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+      scroll-snap-align: center;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    button:active {
+      transform: scale(1);
+    }
+
+    html, body {
+      scroll-behavior: smooth;
+    }
+
+    body::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: lightgray;
+      border-radius: 4px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background: white;
+    }
+
+    @media (max-width: 1080px) {
+      button {
+        width: 150px;
+        height: 67.5%;
+      }
+      #container {
+        margin-top: -30px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="overlay">
-        <h1>Click or tap anywhere to start</h1>
+  <header>
+    <h1>SAWAS.DEV</h1>
+  </header>
+  <div class="center-container">
+    <div id="container">
+      <button onclick="window.location.href='https://gabrielzv1233.net/'">Creator</button>
+      <button onclick="window.location.href='random-site.html'">Random Site</button>
+      <button onclick="window.location.href='https://github.com/gabrielzv1233/coolwebsitethatdoesrandomshit'">GitHub Repo</button>
     </div>
+  </div>
 
-    <div class="container">
-        <h1 id="countdown">Click the button in 3 seconds or get Rick Rolled!</h1>
-        <button id="redirectButton">Click me!</button>
-    </div>
+  <script>
+    const container = document.getElementById('container');
 
-    <script>
-        const overlay = document.querySelector('.overlay');
-        const container = document.querySelector('.container');
-        const countdownElement = document.getElementById('countdown');
-        const button = document.getElementById('redirectButton');
-    
-        const timeoutWebsites = [
-            "https://www.youtube.com/watch?v=xvFZjo5PgG0?t=0" // told ya
-        ];
-    
-        const buttonWebsites = [
-            "https://youtu.be/6dMjCa0nqK0?t=0&utm_source=seman.stream", // skib
-            "https://youtu.be/PXqcHi2fkXI?t=0&utm_source=seman.stream", // trolled
-            "https://youtu.be/pxw-5qfJ1dk?t=0&utm_source=seman.stream", // shrek
-            "https://youtu.be/C43p8h99Cs0?t=0&utm_source=seman.stream", // oo ee a e a
-            "https://youtu.be/YRvOePz2OqQ?t=0&utm_source=seman.stream", // spinning cat.mp4
-            "https://youtu.be/V6HmBbp-OY4?t=0&utm_source=seman.stream", // itialian
-            "https://youtu.be/7Xplhr7-TJs?t=0&utm_source=seman.stream", // distraction
-            "https://youtu.be/NRZIGj3xHkI?t=0&utm_source=seman.stream", // howdy
-            "https://youtu.be/iH4fHAwE7yc?t=0&utm_source=seman.stream", // howdy pt2
-            "https://youtu.be/_WZCvQ5J3pk?t=34&utm_source=seman.stream", // skyrim
-            "https://youtu.be/eUBtsPEWgaY?t=9&utm_source=seman.stream", // ear r*pe
-            "https://youtu.be/FtE6SV_1wu4?t=0&utm_source=seman.stream", // vibin
-            "https://youtu.be/aWoR-9K8ENY?t=0&utm_source=seman.stream", // carl
-            // alot of these were taken from theuselessweb
-            "https://www.cheese.com/", // what do you think?
-            "https://gabrielzv1233.net", // shameless
-            "https://cat-bounce.com/", // boing
-            "https://cornhub.website/", // they changed the URL
-            "https://papertoilet.com/", // tp
-            "https://heeeeeeeey.com/", // hooooooooo
-            "http://www.everydayim.com/", // hustlin
-            "https://corndog.io/", // dawg
-            "https://iamawesome.com/", // are you
-            "http://www.ismycomputeron.com/", // yes
-            "https://crouton.net/", // mmm tasty
-            "https://corgiorgy.com/", // can i pet dat dawg
-            "https://wutdafuk.com/", // :O
-            "https://potatoortomato.com/", // you can't get this wrong
-            "https://existentialcrisis.com/", // nuh uh
-            "http://onemillionlols.com/", // lol
-            "http://www.patience-is-a-virtue.org/", // how long have i been here?
-            "http://chihuahuaspin.com/", // i got bord after 3 :/
-            "https://elonjump.com/", // elon
-            "https://notdayoftheweek.com/", // correct
-            "https://www.bouncingdvdlogo.com/", // patiance
-            "https://isitchristmas.com/" // i'd like to know
-        ];
-    
-        const mouseSpecificWebsites = [
-            "https://pointerpointer.com", // 🫵
-            "http://www.staggeringbeauty.com/", // MY EARS
-            "https://cursoreffects.com/", // wow
-            "https://chrismckenzie.com/", // =D
-            "https://eelslap.com/", // WACK!
-            "http://yeahlemons.com/" // LEMONS!!!
-        ];
-    
-        const hasMouse = window.matchMedia('(pointer: fine)').matches;
-    
-        if (hasMouse) {
-            buttonWebsites.push(...mouseSpecificWebsites);
-            console.log("Mouse detected: Mouse-specific websites added.");
-        } else {
-            console.log("No mouse detected: Mouse-specific websites not added.");
-        }
-    
-        let countdown = 3;
-        let interval;
-    
-        const startCountdown = () => {
-            overlay.style.display = 'none';
-            container.style.display = 'block';
-    
-            interval = setInterval(() => {
-                countdownElement.textContent = `Click the button in ${countdown} seconds or get Rick Rolled!`;
-                countdown--;
-    
-                if (countdown < 0) {
-                    clearInterval(interval);
-                    const randomIndex = Math.floor(Math.random() * timeoutWebsites.length);
-                    window.location.assign(timeoutWebsites[randomIndex]);
-                }
-            }, 1000);
-    
-            button.addEventListener('click', () => {
-                clearInterval(interval);
-                const randomIndex = Math.floor(Math.random() * buttonWebsites.length);
-                window.location.assign(buttonWebsites[randomIndex]);
-            });
-        };
-    
-        const resetTimer = () => {
-            clearInterval(interval);
-            countdown = 3;
-            countdownElement.textContent = `Click the button in ${countdown} seconds or get Rick Rolled!`;
-            startCountdown();
-        };
-    
-        overlay.addEventListener('click', startCountdown);
-        overlay.addEventListener('touchstart', startCountdown, { once: true });
-    
-        window.addEventListener('beforeunload', () => {
-            sessionStorage.setItem('timerState', countdown);
+    window.addEventListener('load', () => {
+      const buttonCount = container.children.length;
+      const buttonWidth = container.children[0].offsetWidth + 10; // Include gap
+      const containerWidth = document.querySelector('.center-container').offsetWidth;
+
+      // Center the buttons dynamically
+      const totalContentWidth = buttonCount * buttonWidth;
+      if (totalContentWidth < containerWidth) {
+        container.style.justifyContent = 'center';
+      } else {
+        const middleIndex = Math.floor(buttonCount / 2);
+        const offset = middleIndex * buttonWidth - (containerWidth / 2 - buttonWidth / 2);
+        container.scrollTo({
+          left: Math.max(0, offset),
+          behavior: 'smooth',
         });
-    
-        window.addEventListener('load', () => {
-            const savedCountdown = sessionStorage.getItem('timerState');
-            if (savedCountdown) {
-                countdown = parseInt(savedCountdown, 10);
-                resetTimer();
-            }
-        });
-    </script>
-    </body>
-    </html>
+      }
+    });
+
+    document.addEventListener('wheel', (event) => {
+      event.preventDefault();
+      const direction = event.deltaY > 0 ? 1 : -1;
+      const buttonWidth = container.children[0].offsetWidth + 10;
+      container.scrollBy({
+        left: direction * buttonWidth,
+        behavior: 'smooth',
+      });
+    });
+
+    container.addEventListener('touchstart', (e) => {
+      this.startX = e.touches[0].pageX;
+    });
+
+    container.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].pageX;
+      const direction = endX < this.startX ? 1 : -1;
+      const buttonWidth = container.children[0].offsetWidth + 10;
+      container.scrollBy({
+        left: direction * buttonWidth,
+        behavior: 'smooth',
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'a') {
+        const newButton = document.createElement('button');
+        newButton.textContent = `Button ${container.children.length + 1}`;
+        container.appendChild(newButton);
+      }
+    });
+  </script>
+</body>
+</html>
